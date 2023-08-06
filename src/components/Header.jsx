@@ -1,13 +1,14 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 
 export default function Header() {
   return (
-    <header className="flex px-8">
+    <header className="flex px-8 sticky top-0 bg-white z-10">
       {/* logo */}
       <h1 className="cursor-pointer">
-        <a href="." className="block w-32 p-4">
+        <Link to="/" className="block w-32 p-4">
           <img src={logo} alt="Youtube logo" className="block" />
-        </a>
+        </Link>
       </h1>
 
       <div className="flex flex-1 justify-center">
