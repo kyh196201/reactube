@@ -6,6 +6,10 @@ module.exports = {
       fontFamily: {
         noto: ['Noto Sans KR', 'sans-serif'],
       },
+      colors: {
+        'custom-black': '#0f0f0f',
+        'custom-gray': '#606060',
+      },
     },
   },
   plugins: [],
