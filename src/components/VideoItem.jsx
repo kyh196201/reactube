@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import VideoChannel from './VideoChannel';
 
 export default function VideoItem(props) {
   const { video: _video } = props;
@@ -69,14 +70,7 @@ export default function VideoItem(props) {
 
       {/* 비디오 정보 */}
       <div className="flex">
-        {/* 채널 컴포넌트 */}
-        <Link to="video" className="shrink-0 w-9 h-9">
-          <img
-            className="w-full h-full object-cover rounded-full"
-            src={video.channel.thumbnail}
-            alt={video.channel.title}
-          />
-        </Link>
+        <VideoChannel channel={video.channel} />
 
         <Link to="video" className="pl-3 pr-6">
           <h3 className="line-clamp-2 text-custom-black">{video.title}</h3>
