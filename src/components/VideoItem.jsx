@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import VideoChannel from './VideoChannel';
 
 export default function VideoItem(props) {
-  const { video } = props;
+  const { video, channel } = props;
 
   return (
     <div>
@@ -19,12 +19,12 @@ export default function VideoItem(props) {
 
       {/* 비디오 정보 */}
       <div className="flex">
-        {video.channel && <VideoChannel channel={video.channel} />}
+        {channel && <VideoChannel channel={channel} />}
 
         <Link to="video" className="pl-3 pr-6">
           <h3 className="line-clamp-2 text-custom-black">{video.title}</h3>
           <strong className="text-custom-gray text-sm font-normal">
-            {video.channel && video.channel.title}
+            {channel && channel.title}
           </strong>
           <div className="flex items-center text-custom-gray text-sm">
             <span>조회수 525회</span>
