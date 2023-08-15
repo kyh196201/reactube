@@ -4,10 +4,12 @@ import VideoChannel from './VideoChannel';
 export default function VideoItem(props) {
   const { video, channel } = props;
 
+  const videoDetailPath = `video/${video.id}`;
+
   return (
     <div>
       {/* 비디오 썸네일 */}
-      <Link to="video" className="block">
+      <Link to={videoDetailPath} className="block">
         <figure className="aspect-video mb-3 overflow-hidden rounded-xl">
           <img
             className="w-full h-full object-cover"
@@ -21,7 +23,7 @@ export default function VideoItem(props) {
       <div className="flex">
         {channel && <VideoChannel channel={channel} />}
 
-        <Link to="video" className="pl-3 pr-6">
+        <Link to={videoDetailPath} className="pl-3 pr-6">
           <h3 className="line-clamp-2 text-custom-black">{video.title}</h3>
           <strong className="text-custom-gray text-sm font-normal">
             {channel && channel.title}

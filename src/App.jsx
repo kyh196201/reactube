@@ -9,7 +9,7 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/video" element={<Video />} />
+        <Route path="/video/:videoId" element={<Video />} />
         <Route path="/search" element={<Search />} />
       </Route>
     </Routes>
