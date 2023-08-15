@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import VideoChannel from './VideoChannel';
+import Avatar from './Avatar';
 
 export default function VideoItem(props) {
   const { video, channel } = props;
@@ -21,7 +21,11 @@ export default function VideoItem(props) {
 
       {/* 비디오 정보 */}
       <div className="flex">
-        {channel && <VideoChannel channel={channel} />}
+        {channel && (
+          <Link to="/">
+            <Avatar thumbnail={channel.thumbnail} title={channel.title} />
+          </Link>
+        )}
 
         <Link to={videoDetailPath} className="pl-3 pr-6">
           <h3 className="line-clamp-2 text-custom-black">{video.title}</h3>
