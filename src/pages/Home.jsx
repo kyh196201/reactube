@@ -1,5 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import VideoItem from '../components/VideoItem';
+import { getLocalChannels } from '../api/channels';
+import { getLocalPopularVideos } from '../api/videos';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
@@ -7,31 +9,7 @@ export default function Home() {
 
   // 비디오 목록 조회
   async function fetchPopularVideos() {
-    const response = await fetch('videos/popular.json');
-    const { items } = await response.json();
-
-    const videoItems = items.map(video => {
-      const { id, snippet } = video;
-
-      const thumbnail =
-        snippet.thumbnails.high?.url ??
-        snippet.thumbnails.medium?.url ??
-        snippet.thumbnails.default?.url;
-
-      return {
-        id,
-        thumbnail,
-        categoryId: snippet.categoryId,
-        publishedAt: snippet.publishedAt,
-        title: snippet.title,
-        description: snippet.description,
-        tags: snippet.tags ?? [],
-        channel: {
-          id: snippet.channelId,
-          title: snippet.channelTitle,
-        },
-      };
-    });
+    const videoItems = await getLocalPopularVideos();
 
     setVideos(prev => {
       return [...prev, ...videoItems];
@@ -43,24 +21,7 @@ export default function Home() {
   // 채널 목록 조회
   // eslint-disable-next-line no-unused-vars
   async function fetchChannels(channelIds = []) {
-    const response = await fetch('videos/channel.json');
-    const { items } = await response.json();
-
-    const channelItems = items.map(channel => {
-      const { id, snippet } = channel;
-
-      const thumbnail =
-        snippet.thumbnails.high?.url ??
-        snippet.thumbnails.medium?.url ??
-        snippet.thumbnails.default?.url;
-
-      return {
-        id,
-        thumbnail,
-        title: snippet.title,
-        description: snippet.description,
-      };
-    });
+    const channelItems = await getLocalChannels(channelIds.join());
 
     setChannels(prev => {
       return [...prev, ...channelItems];
@@ -69,9 +30,12 @@ export default function Home() {
 
   const fetchVideosAndChannels = useCallback(async () => {
     const videoList = await fetchPopularVideos();
-    const channelIds = videoList.map(video => video.channel.id);
 
-    await fetchChannels(channelIds);
+    if (videoList.length) {
+      const channelIds = videoList.map(video => video.channel.id);
+
+      await fetchChannels(channelIds);
+    }
   }, []);
 
   useEffect(() => {
