@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 function mapVideo(videoResponse) {
-  const { id, snippet } = videoResponse;
+  const { id, snippet, statistics } = videoResponse;
 
   const thumbnail =
     snippet.thumbnails.high?.url ??
@@ -25,6 +25,7 @@ function mapVideo(videoResponse) {
       id: snippet.channelId,
       title: snippet.channelTitle,
     },
+    viewCount: statistics?.viewCount ?? 0,
   };
 }
 
