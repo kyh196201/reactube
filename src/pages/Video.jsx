@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Avatar from '../components/Avatar';
 import VideoItem from '../components/VideoItem';
 import VideoDescription from '../components/VideoDescription';
+import VideoPlayer from '../components/VideoPlayer';
 
 export default function Video() {
   const relatedVideos = [
@@ -66,12 +67,12 @@ export default function Video() {
       {/* 비디오 영역 */}
       <section className="grow w-2/3 p-6">
         {/* 비디오 플레이어 */}
-        <figure className="mb-3">
-          <img
-            src="https://i.ytimg.com/vi/bxzFpWzyScM/maxresdefault.jpg"
-            alt="【𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭】 부디 저에게 앞으로 나아갈 용기를 주세요"
+        <div className="mb-3">
+          <VideoPlayer
+            videoId="4fikvcuirtY"
+            videoTitle="【𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭】 부디 저에게 앞으로 나아갈 용기를 주세요"
           />
-        </figure>
+        </div>
 
         {/* 비디오 정보 영역 */}
         <div className="mb-6">
