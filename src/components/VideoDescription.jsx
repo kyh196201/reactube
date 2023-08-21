@@ -9,10 +9,16 @@ export default function VideoDescription() {
 
   const wrapperClass = isOpen
     ? ''
-    : 'cursor-pointer hover:bg-black/10 active:bg-custom-ce';
+    : 'cursor-pointer hover:bg-black/10 active:bg-custom-ce text-left';
+
+  const Element = isOpen ? 'div' : 'button';
 
   return (
-    <div className={`bg-custom-f2 rounded-xl p-3 ${wrapperClass}`}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <Element
+      className={`bg-custom-f2 rounded-xl p-3 ${wrapperClass}`}
+      onClick={isOpen ? null : () => toggle()}
+    >
       <div className={isOpen ? '' : 'line-clamp-4'}>
         <div className="text-custom-black">
           <span className="text-sm mr-1">
@@ -56,14 +62,10 @@ export default function VideoDescription() {
           간략히
         </button>
       ) : (
-        <button
-          type="button"
-          className="mt-5 text-sm text-custom-black bottom-3 right-3"
-          onClick={() => toggle()}
-        >
-          ...더보기
-        </button>
+        <span className="mt-5 text-sm text-custom-black bottom-3 right-3">
+          더보기
+        </span>
       )}
-    </div>
+    </Element>
   );
 }
