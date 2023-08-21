@@ -154,7 +154,7 @@ export default function Video() {
           <ul>
             {relatedVideos.map((video, index) => (
               <li key={video.id} className={index > 0 ? 'mt-2' : ''}>
-                <VideoItem video={video} />
+                <VideoItem video={video} type="horizontal" />
               </li>
             ))}
           </ul>

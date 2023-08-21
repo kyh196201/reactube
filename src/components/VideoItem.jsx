@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Avatar from './Avatar';
 
 export default function VideoItem(props) {
-  const { video, channel, type = 'horizontal' } = props;
+  const { video, channel, type = 'vertical' } = props;
 
   const videoDetailPath = `video/${video.id}`;
 
