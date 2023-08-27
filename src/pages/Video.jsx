@@ -1,10 +1,22 @@
-import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { Link, useParams } from 'react-router-dom';
 import Avatar from '../components/Avatar';
 import VideoItem from '../components/VideoItem';
 import VideoDescription from '../components/VideoDescription';
 import VideoPlayer from '../components/VideoPlayer';
+import { getLocalVideo } from '../api/videos';
 
 export default function Video() {
+  const { videoId } = useParams();
+
+  const {
+    data: videoData,
+    error,
+    isLoading,
+  } = useQuery('user', () => getLocalVideo(videoId), {
+    retry: 0,
+  });
+
   const relatedVideos = [
     {
       id: '4fikvcuirtY',
@@ -110,22 +122,27 @@ export default function Video() {
     title: '하이멜로디 High Melody',
   };
 
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
+  if (error || !videoData) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <div className="flex">
       {/* 비디오 영역 */}
       <section className="grow w-2/3 p-6">
         {/* 비디오 플레이어 */}
         <div className="mb-3">
-          <VideoPlayer
-            videoId="4fikvcuirtY"
-            videoTitle="【𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭】 부디 저에게 앞으로 나아갈 용기를 주세요"
-          />
+          <VideoPlayer videoId={videoId} videoTitle={videoData.title} />
         </div>
 
         {/* 비디오 정보 영역 */}
         <div className="mb-6">
           <h2 className="mb-3 text-xl font-semibold text-custom-black">
-            【𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭】 부디 저에게 앞으로 나아갈 용기를 주세요
+            {videoData.title}
           </h2>
           {/* 비디오 채널, 구독, 좋아요 공유 ... */}
           <div className="mb-3">
@@ -143,7 +160,7 @@ export default function Video() {
           </div>
 
           {/* 비디오 조회수, 시간, 상세 정보 */}
-          <VideoDescription />
+          <VideoDescription video={videoData} />
         </div>
       </section>
 

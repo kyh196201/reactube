@@ -26,6 +26,8 @@ function mapVideo(videoResponse) {
       title: snippet.channelTitle,
     },
     viewCount: statistics?.viewCount ?? 0,
+    likeCount: statistics?.likeCount ?? 0,
+    commentCount: statistics?.commentCount ?? 0,
   };
 }
 
@@ -45,10 +47,40 @@ export async function getPopularVideos() {
 }
 
 export async function getLocalPopularVideos() {
-  const response = await fetch('videos/popular.json');
+  const response = await fetch('/videos/popular.json');
   const { items } = await response.json();
 
   return items.map(mapVideo);
+}
+
+/**
+ * 비디오 상세 정보 조회
+ *
+ * @param {string} id video id
+ * @returns 비디오 상세 정보
+ */
+export async function getVideo(id) {
+  const response = await instance.get('', {
+    params: {
+      part: 'snippet,statistics',
+      maxResults: 1,
+      key: process.env.REACT_APP_YOUTUBE_API_KEY,
+      id,
+    },
+  });
+
+  const { items } = response.data;
+
+  return items.length ? mapVideo(items[0]) : null;
+}
+
+export async function getLocalVideo() {
+  const response = await fetch('/videos/detail.json');
+  const { items } = await response.json();
+
+  console.log('items', items);
+
+  return mapVideo(items[0]);
 }
 
 export default {};
