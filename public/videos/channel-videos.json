@@ -1,0 +1,352 @@
+{
+	"kind": "youtube#searchListResponse",
+	"etag": "npa-NvPHQUOn3Z0iH5Gm9POFsJo",
+	"nextPageToken": "CAoQAA",
+	"regionCode": "KR",
+	"pageInfo": {
+			"totalResults": 93,
+			"resultsPerPage": 10
+	},
+	"items": [
+			{
+					"kind": "youtube#searchResult",
+					"etag": "aBMiEml7ZzTUB_iCLtfLGNaC9dM",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "mrhJjoOELBs"
+					},
+					"snippet": {
+							"publishedAt": "2023-05-18T14:07:27Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "이거 들으면 잠 못 잠, 한국 역사상 최고의 게임 브금",
+							"description": "My Prince My Kingdom - 메이플스토리 OST - (샤레니안의 기사) Playlist 00:00 My Prince My Kingdom - Maple Story OST 02:05 ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/mrhJjoOELBs/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/mrhJjoOELBs/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/mrhJjoOELBs/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-05-18T14:07:27Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "-zOUTG9-YD7np7QddNGdTDvbTeg",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "hgGrGQ4tRFU"
+					},
+					"snippet": {
+							"publishedAt": "2023-03-10T08:07:39Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "시대와 언어를 초월한 레전드 음악🔥",
+							"description": "안녕하세요! 이 음악은 제가 가장 좋아하는 음악 남구민 작곡가님의 Reminiscence입니다!! 이 음악은 아무리 들어도 매 번 설렘을 ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/hgGrGQ4tRFU/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/hgGrGQ4tRFU/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/hgGrGQ4tRFU/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-03-10T08:07:39Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "IxiYOsGhBMXEx6nzXM520G4cTSo",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "ISX_7CCWgB0"
+					},
+					"snippet": {
+							"publishedAt": "2023-06-17T15:01:15Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "두 번째 시작, 새로운 도약을 꿈꾸며 : 세컨드 런 - 테일즈위버 OST",
+							"description": "세컨드 런 - 테일즈위버 OST Second Run - TalesWeaver OST 이 음악은 제가 가장 좋아하는 음악 남구민 작곡가님의 Second Run ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/ISX_7CCWgB0/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/ISX_7CCWgB0/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/ISX_7CCWgB0/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-06-17T15:01:15Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "9vPsRrfY9NRj8iOgGaGcV5BFldA",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "HGVM9RHYNds"
+					},
+					"snippet": {
+							"publishedAt": "2023-04-05T08:23:00Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "류이치 사카모토를 기억하며",
+							"description": "선생님이 남기신 발자취는 우리의 삶에서 영원히 사라지지 않을 것입니다. #류이치사카모토 #Merrychristmasmrlawrence.",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/HGVM9RHYNds/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/HGVM9RHYNds/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/HGVM9RHYNds/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-04-05T08:23:00Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "roCtz95CEkoa9HBO34waWCN3hUo",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "ursHSfZzS8M"
+					},
+					"snippet": {
+							"publishedAt": "2023-07-05T13:22:57Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "한번 들으면 계속 생각나는 뉴에이지 음악",
+							"description": "힐링 음악, 수면 음악, 수면 유도 음악, 잠 안올 때 듣는 음악, 공부할 때 듣는 음악, 뉴에이지 피아노, 몽환적인, 스트레스 해소, 명상 음악 ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/ursHSfZzS8M/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/ursHSfZzS8M/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/ursHSfZzS8M/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-07-05T13:22:57Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "Rg0cHhYI18NU5k2o1iQLLWxFmyM",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "wl4I7kr7Nqc"
+					},
+					"snippet": {
+							"publishedAt": "2023-03-12T05:01:59Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "첫 소절부터 미치도록 설레는 레전드 음악🔥",
+							"description": "안녕하세요! 이 음악은 제가 가장 좋아하는 음악 남구민 작곡가님의 Reminiscence입니다!! 이 음악은 아무리 들어도 매 번 설렘을 ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/wl4I7kr7Nqc/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/wl4I7kr7Nqc/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/wl4I7kr7Nqc/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-03-12T05:01:59Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "8_yhkmXM-SCPCbJKXZOYapbgdTk",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "ggu7jYsEkmM"
+					},
+					"snippet": {
+							"publishedAt": "2023-08-08T12:45:10Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "듣자마자 눈물 나는 메이플 브금",
+							"description": "Heaven Again - 메이플스토리 OST - (블랙헤븐 Black Heaven) : Studio EIM 안녕하세요! 저는 메이플 스토리의 BGM을 즐겨 듣습니다 ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/ggu7jYsEkmM/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/ggu7jYsEkmM/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/ggu7jYsEkmM/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-08-08T12:45:10Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "IqEbQKngBeG-LwB5_c9DTNfB-aA",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "liqIUTkO1lg"
+					},
+					"snippet": {
+							"publishedAt": "2023-04-14T12:16:00Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "내일은 더 밝은 빛으로 가득할 거야, 몸과 마음을 녹여줄 뉴에이지 힐링 음악",
+							"description": "힐링 음악, 수면 음악, 스트레스 해소, 수면 유도 음악, 잠 안올 때 듣는 음악, 명상 음악, 뉴에이지 피아노, 공부할 때 듣는 음악, 몽환적인 ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/liqIUTkO1lg/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/liqIUTkO1lg/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/liqIUTkO1lg/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-04-14T12:16:00Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "Pm2I4j4DHl0WP0dBsnyASZZ3dUs",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "g7KELNbDoEs"
+					},
+					"snippet": {
+							"publishedAt": "2023-04-21T13:32:06Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "한국 역사상 역대 최고 게임 음악",
+							"description": "My Prince My Kingdom - 메이플스토리 OST (차원의 도서관 EP : 샤레니안의 기사) My Prince My Kingdom - Maple Story OST ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/g7KELNbDoEs/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/g7KELNbDoEs/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/g7KELNbDoEs/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-04-21T13:32:06Z"
+					}
+			},
+			{
+					"kind": "youtube#searchResult",
+					"etag": "NfpZz-pnKzbIV8laKrNCCvoH4u0",
+					"id": {
+							"kind": "youtube#video",
+							"videoId": "-WtanoTDgvo"
+					},
+					"snippet": {
+							"publishedAt": "2023-07-25T13:50:51Z",
+							"channelId": "UCQrSCC3a2CaPRc0uTGXLWSQ",
+							"title": "약속했던 행복의 끝에서, 희망으로 가득찬 뉴에이지 힐링 음악",
+							"description": "힐링 음악, 수면 음악, 수면 유도 음악, 잠 안올 때 듣는 음악, 공부할 때 듣는 음악, 뉴에이지 피아노, 몽환적인, 스트레스 해소, 명상 음악 ...",
+							"thumbnails": {
+									"default": {
+											"url": "https://i.ytimg.com/vi/-WtanoTDgvo/default.jpg",
+											"width": 120,
+											"height": 90
+									},
+									"medium": {
+											"url": "https://i.ytimg.com/vi/-WtanoTDgvo/mqdefault.jpg",
+											"width": 320,
+											"height": 180
+									},
+									"high": {
+											"url": "https://i.ytimg.com/vi/-WtanoTDgvo/hqdefault.jpg",
+											"width": 480,
+											"height": 360
+									}
+							},
+							"channelTitle": "하이멜로디 High Melody ",
+							"liveBroadcastContent": "none",
+							"publishTime": "2023-07-25T13:50:51Z"
+					}
+			}
+	]
+}
