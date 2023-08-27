@@ -13,7 +13,7 @@ export default function VideoPlayer(props) {
   };
 
   return (
-    <figure className="aspect-video relative">
+    <figure className="aspect-video relative rounded-xl overflow-hidden">
       <figcaption className="sr-only">{videoTitle}</figcaption>
 
       <YouTube

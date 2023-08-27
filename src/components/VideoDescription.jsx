@@ -10,7 +10,7 @@ export default function VideoDescription({ video }) {
 
   const wrapperClass = isOpen
     ? ''
-    : 'cursor-pointer hover:bg-black/10 active:bg-custom-ce text-left';
+    : 'block w-full cursor-pointer hover:bg-black/10 active:bg-custom-ce text-left';
 
   const Element = isOpen ? 'div' : 'button';
 
