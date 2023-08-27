@@ -31,7 +31,7 @@ export default function VideoItem(props) {
               {channel && channel.title}
             </strong>
             <div className="items-center text-custom-gray text-xs overflow-hidden whitespace-nowrap text-ellipsis">
-              <span className="align-middle">조회수 525회</span>
+              <span className="align-middle">조회수 {video.viewCount}회</span>
               <span className="align-middle before:content-['•'] before:mx-1">
                 {video.publishedAt}
               </span>
@@ -70,7 +70,7 @@ export default function VideoItem(props) {
             {channel && channel.title}
           </strong>
           <div className="flex items-center text-custom-gray text-sm">
-            <span>조회수 525회</span>
+            <span>조회수 {video.viewCount}회</span>
             <span className="before:content-['•'] before:mx-1">
               {video.publishedAt}
             </span>
