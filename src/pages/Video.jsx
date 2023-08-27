@@ -16,23 +16,27 @@ export default function Video() {
     data: videoData,
     error,
     isLoading,
-  } = useQuery('video', () => getLocalVideo(videoId), {
+  } = useQuery(['video', videoId], () => getLocalVideo(videoId), {
     retry: 0,
   });
 
   const channelId = videoData?.channel?.id ?? null;
 
   // 채널 api 쿼리
-  const channelQuery = useQuery('channel', () => getLocalChannels(channelId), {
-    retry: 0,
-    enabled: !!channelId,
-  });
+  const channelQuery = useQuery(
+    ['channel', channelId],
+    () => getLocalChannels(channelId),
+    {
+      retry: 0,
+      enabled: !!channelId,
+    },
+  );
 
   const channel = channelQuery.data?.[0] ?? null;
 
   // 채널에 속한 비디오 목록 api 쿼리
   const channelVideosQuery = useQuery(
-    'channelVideos',
+    ['channelVideos', channelId],
     () => getLocalChannelVideos({ channelId }),
     {
       retry: 0,
