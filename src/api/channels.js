@@ -40,7 +40,7 @@ export async function getChannels(channelId) {
 }
 
 export async function getLocalChannels() {
-  const response = await fetch('videos/channel.json');
+  const response = await fetch('/videos/channel.json');
   const { items } = await response.json();
 
   return items.map(mapChannel);

@@ -78,8 +78,6 @@ export async function getLocalVideo() {
   const response = await fetch('/videos/detail.json');
   const { items } = await response.json();
 
-  console.log('items', items);
-
   return mapVideo(items[0]);
 }
 

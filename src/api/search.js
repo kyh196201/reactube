@@ -14,9 +14,9 @@ function mapSearchedVideo(videoResponse) {
     snippet.thumbnails.default?.url;
 
   return {
-    id,
+    id: id.videoId,
     thumbnail,
-    categoryId: snippet.categoryId,
+    categoryId: null,
     publishedAt: snippet.publishedAt,
     title: snippet.title,
     description: snippet.description,
