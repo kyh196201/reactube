@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Avatar from './Avatar';
 
 export default function VideoItem(props) {
-  const { video, channel, type = 'vertical' } = props;
+  const { video, channel, type = 'vertical', showViewCount = true } = props;
 
   const videoDetailPath = `video/${video.id}`;
 
@@ -31,10 +31,12 @@ export default function VideoItem(props) {
               {channel && channel.title}
             </strong>
             <div className="items-center text-custom-gray text-xs overflow-hidden whitespace-nowrap text-ellipsis">
-              <span className="align-middle">조회수 {video.viewCount}회</span>
-              <span className="align-middle before:content-['•'] before:mx-1">
-                {video.publishedAt}
-              </span>
+              {showViewCount && (
+                <span className="align-middle after:content-['•'] after:mx-1">
+                  조회수 {video.viewCount}회
+                </span>
+              )}
+              <span className="align-middle">{video.publishedAt}</span>
             </div>
           </Link>
         </div>
@@ -70,10 +72,12 @@ export default function VideoItem(props) {
             {channel && channel.title}
           </strong>
           <div className="flex items-center text-custom-gray text-sm">
-            <span>조회수 {video.viewCount}회</span>
-            <span className="before:content-['•'] before:mx-1">
-              {video.publishedAt}
-            </span>
+            {showViewCount && (
+              <span className="after:content-['•'] after:mx-1">
+                조회수 {video.viewCount}회
+              </span>
+            )}
+            <span>{video.publishedAt}</span>
           </div>
         </Link>
       </div>

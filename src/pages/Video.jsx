@@ -122,6 +122,7 @@ export default function Video() {
                   video={video}
                   channel={getChannelInfoById(video.channel.id)}
                   type="horizontal"
+                  showViewCount={false}
                 />
               </li>
             ))}
