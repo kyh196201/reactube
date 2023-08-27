@@ -12,15 +12,15 @@ export default function Video() {
   const { videoId } = useParams();
 
   // 비디오 api 쿼리
-  const {
-    data: videoData,
-    error,
-    isLoading,
-  } = useQuery(['video', videoId], () => getLocalVideo(videoId), {
-    retry: 0,
-  });
+  const videoQuery = useQuery(
+    ['video', videoId],
+    () => getLocalVideo(videoId),
+    {
+      retry: 0,
+    },
+  );
 
-  const channelId = videoData?.channel?.id ?? null;
+  const channelId = videoQuery.data?.channel?.id;
 
   // 채널 api 쿼리
   const channelQuery = useQuery(
@@ -69,12 +69,24 @@ export default function Video() {
     return matched ?? null;
   }
 
-  if (isLoading) {
+  if (
+    videoQuery.isLoading ||
+    channelQuery.isLoading ||
+    channelsFromVideosQuery.isLoading
+  ) {
     return <div>loading...</div>;
   }
 
-  if (error || !videoData) {
-    return <div>Error: {error.message}</div>;
+  if (videoQuery.error || channelQuery.error || channelsFromVideosQuery.error) {
+    return (
+      <div>
+        Error:{' '}
+        {
+          (videoQuery.error || channelQuery.error || channelVideosQuery.error)
+            .message
+        }
+      </div>
+    );
   }
 
   return (
@@ -83,13 +95,13 @@ export default function Video() {
       <section className="grow w-2/3 p-6">
         {/* 비디오 플레이어 */}
         <div className="mb-3">
-          <VideoPlayer videoId={videoId} videoTitle={videoData.title} />
+          <VideoPlayer videoId={videoId} videoTitle={videoQuery.data.title} />
         </div>
 
         {/* 비디오 정보 영역 */}
         <div className="mb-6">
           <h2 className="mb-3 text-xl font-semibold text-custom-black">
-            {videoData.title}
+            {videoQuery.data.title}
           </h2>
           {/* 비디오 채널, 구독, 좋아요 공유 ... */}
           {channel && (
@@ -111,7 +123,7 @@ export default function Video() {
           )}
 
           {/* 비디오 조회수, 시간, 상세 정보 */}
-          <VideoDescription video={videoData} />
+          <VideoDescription video={videoQuery.data} />
         </div>
       </section>
 
