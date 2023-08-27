@@ -6,7 +6,7 @@ const instance = axios.create({
 });
 
 function mapChannel(channelResponse) {
-  const { id, snippet } = channelResponse;
+  const { id, snippet, statistics } = channelResponse;
 
   const thumbnail =
     snippet.thumbnails.high?.url ??
@@ -18,6 +18,9 @@ function mapChannel(channelResponse) {
     thumbnail,
     title: snippet.title,
     description: snippet.description,
+    viewCount: statistics?.viewCount ?? 0,
+    subscriberCount: statistics?.subscriberCount ?? 0,
+    videoCount: statistics?.videoCount ?? 0,
   };
 }
 
@@ -25,7 +28,7 @@ export async function getChannels(channelId) {
   const response = await instance.get('', {
     params: {
       id: channelId,
-      part: 'snippet',
+      part: 'snippet,statistics',
       maxResults: 25,
       key: process.env.REACT_APP_YOUTUBE_API_KEY,
     },

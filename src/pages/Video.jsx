@@ -5,17 +5,29 @@ import VideoItem from '../components/VideoItem';
 import VideoDescription from '../components/VideoDescription';
 import VideoPlayer from '../components/VideoPlayer';
 import { getLocalVideo } from '../api/videos';
+import { getChannels } from '../api/channels';
 
 export default function Video() {
   const { videoId } = useParams();
 
+  // 비디오 api 쿼리
   const {
     data: videoData,
     error,
     isLoading,
-  } = useQuery('user', () => getLocalVideo(videoId), {
+  } = useQuery('video', () => getLocalVideo(videoId), {
     retry: 0,
   });
+
+  const channelId = videoData?.channel?.id ?? null;
+
+  // 채널 api 쿼리
+  const channelQuery = useQuery('channel', () => getChannels(channelId), {
+    retry: 0,
+    enabled: !!channelId,
+  });
+
+  const channel = channelQuery.data?.[0] ?? null;
 
   const relatedVideos = [
     {
@@ -116,12 +128,6 @@ export default function Video() {
     },
   ];
 
-  const channel = {
-    thumbnail:
-      'https://yt3.ggpht.com/NQ9mKhR_C1XBS75Xr4sN3KcMQkdKtX4pN3mLSZi4nzqWKv1nKCvrLPxk7nnVC7ivzVlhhkZ3=s48-c-k-c0x00ffffff-no-rj',
-    title: '하이멜로디 High Melody',
-  };
-
   if (isLoading) {
     return <div>loading...</div>;
   }
@@ -145,19 +151,23 @@ export default function Video() {
             {videoData.title}
           </h2>
           {/* 비디오 채널, 구독, 좋아요 공유 ... */}
-          <div className="mb-3">
-            {/* 채널 정보 */}
-            <div className="flex">
-              <Link to="/" className="mr-3">
-                <Avatar thumbnail={channel.thumbnail} title={channel.title} />
-              </Link>
+          {channel && (
+            <div className="mb-3">
+              {/* 채널 정보 */}
+              <div className="flex">
+                <Link to="/" className="mr-3">
+                  <Avatar thumbnail={channel.thumbnail} title={channel.title} />
+                </Link>
 
-              <div className="flex flex-1 flex-col">
-                <em className="text-custom-black">하이멜로디 High Melody</em>
-                <span className="text-xs text-custom-gray">구독자 2.7만명</span>
+                <div className="flex flex-1 flex-col">
+                  <em className="text-custom-black">{channel.title}</em>
+                  <span className="text-xs text-custom-gray">
+                    구독자 {channel.subscriberCount}명
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* 비디오 조회수, 시간, 상세 정보 */}
           <VideoDescription video={videoData} />
