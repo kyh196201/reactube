@@ -4,7 +4,7 @@ import Avatar from './Avatar';
 export default function VideoItem(props) {
   const { video, channel, type = 'vertical', showViewCount = true } = props;
 
-  const videoDetailPath = `video/${video.id}`;
+  const videoDetailPath = `/video/${video.id}`;
 
   // 가로 타입
   if (type === 'horizontal') {
