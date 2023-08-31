@@ -1,4 +1,10 @@
 // https://gurtn.tistory.com/166
+/**
+ * 입력받은 날짜를 현재 시간 기준으로 경과 시간을 계산해서 반환합니다.
+ *
+ * @param {계산할 날짜} date
+ * @returns 계산된 경과 시간 문자열
+ */
 function getElapsedTime(date) {
   const start = new Date(date);
   const end = new Date();
