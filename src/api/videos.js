@@ -34,7 +34,7 @@ function mapVideo(videoResponse) {
 export async function getPopularVideos() {
   const response = await instance.get('', {
     params: {
-      part: 'snippet',
+      part: 'snippet,statistics',
       chart: 'mostPopular',
       maxResults: 25,
       key: process.env.REACT_APP_YOUTUBE_API_KEY,
