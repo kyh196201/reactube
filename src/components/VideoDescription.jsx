@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { formatCount } from '../utils';
+import { getElapsedTime } from '../utils/date';
 
 export default function VideoDescription({ video }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { description, viewCount, publishedAt } = video;
+  const { description, publishedAt } = video;
+
+  const viewCount = formatCount(video.viewCount || 0);
+  const elapsedTime = getElapsedTime(publishedAt);
 
   function toggle() {
     setIsOpen(prev => !prev);
@@ -26,7 +31,7 @@ export default function VideoDescription({ video }) {
             조회수 <em>{viewCount}회</em>
           </span>
           <span aria-label="업로드된지" className="text-sm">
-            {publishedAt}
+            {elapsedTime}
           </span>
         </div>
 
