@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
+import { getElapsedTime } from '../utils/date';
 import Avatar from './Avatar';
 
 export default function VideoItem(props) {
   const { video, channel, type = 'vertical', showViewCount = true } = props;
 
   const videoDetailPath = `/video/${video.id}`;
+  const elapsedTime = getElapsedTime(video.publishedAt);
 
   // 가로 타입
   if (type === 'horizontal') {
@@ -36,7 +38,7 @@ export default function VideoItem(props) {
                   조회수 {video.viewCount}회
                 </span>
               )}
-              <span className="align-middle">{video.publishedAt}</span>
+              <span className="align-middle">{elapsedTime}</span>
             </div>
           </Link>
         </div>
@@ -77,7 +79,7 @@ export default function VideoItem(props) {
                 조회수 {video.viewCount}회
               </span>
             )}
-            <span>{video.publishedAt}</span>
+            <span>{elapsedTime}</span>
           </div>
         </Link>
       </div>
