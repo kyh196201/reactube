@@ -21,15 +21,18 @@ export default function Search() {
 
   const videoList = searchQuery.data ?? [];
   const channelIds = videoList.map(video => video.channel.id);
+  const sortedChannelIds = channelIds.length
+    ? [...channelIds].sort((a, b) => a.localeCompare(b))
+    : [];
 
   // 채널 api 쿼리
   // TODO: hook으로 분리
   const channelQuery = useQuery(
-    ['channel'],
-    () => getChannels(channelIds.join(',')),
+    ['channel', sortedChannelIds.join(',')],
+    () => getChannels(sortedChannelIds.join(',')),
     {
       retry: 0,
-      enabled: !!channelIds.length,
+      enabled: !!sortedChannelIds.length,
     },
   );
 
