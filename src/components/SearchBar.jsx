@@ -46,7 +46,10 @@ export default function SearchBar() {
   }
 
   return (
-    <form className="flex w-1/2 items-center" onSubmit={handleSubmit}>
+    <form
+      className="flex w-1/2 items-center max-w-[600px]"
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         className="flex-1 h-10 border-2 border-gray-300 text-base rounded-l-full pl-4 pr-1 focus:border-blue-500 transition-colors duration-100"
