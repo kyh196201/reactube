@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import VideoItem from '../components/VideoItem';
-import { getLocalChannels } from '../api/channels';
-import { getLocalPopularVideos } from '../api/videos';
+import { getChannels } from '../api/channels';
+import { getPopularVideos } from '../api/videos';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
@@ -9,7 +9,7 @@ export default function Home() {
 
   // 비디오 목록 조회
   async function fetchPopularVideos() {
-    const videoItems = await getLocalPopularVideos();
+    const videoItems = await getPopularVideos();
 
     setVideos(prev => {
       return [...prev, ...videoItems];
@@ -21,7 +21,7 @@ export default function Home() {
   // 채널 목록 조회
   // eslint-disable-next-line no-unused-vars
   async function fetchChannels(channelIds = []) {
-    const channelItems = await getLocalChannels(channelIds.join());
+    const channelItems = await getChannels(channelIds.join());
 
     setChannels(prev => {
       return [...prev, ...channelItems];

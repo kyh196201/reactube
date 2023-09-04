@@ -4,28 +4,24 @@ import Avatar from '../components/Avatar';
 import VideoItem from '../components/VideoItem';
 import VideoDescription from '../components/VideoDescription';
 import VideoPlayer from '../components/VideoPlayer';
-import { getLocalVideo } from '../api/videos';
-import { getLocalChannels } from '../api/channels';
-import { getLocalChannelVideos } from '../api/search';
+import { getVideo } from '../api/videos';
+import { getChannels } from '../api/channels';
+import { getChannelVideos } from '../api/search';
 
 export default function Video() {
   const { videoId } = useParams();
 
   // 비디오 api 쿼리
-  const videoQuery = useQuery(
-    ['video', videoId],
-    () => getLocalVideo(videoId),
-    {
-      retry: 0,
-    },
-  );
+  const videoQuery = useQuery(['video', videoId], () => getVideo(videoId), {
+    retry: 0,
+  });
 
   const channelId = videoQuery.data?.channel?.id;
 
   // 채널 api 쿼리
   const channelQuery = useQuery(
     ['channel', channelId],
-    () => getLocalChannels(channelId),
+    () => getChannels(channelId),
     {
       retry: 0,
       enabled: !!channelId,
@@ -37,7 +33,7 @@ export default function Video() {
   // 채널에 속한 비디오 목록 api 쿼리
   const channelVideosQuery = useQuery(
     ['channelVideos', channelId],
-    () => getLocalChannelVideos({ channelId }),
+    () => getChannelVideos({ channelId }),
     {
       retry: 0,
       enabled: !!channelId,
@@ -54,7 +50,7 @@ export default function Video() {
   // 3. 채널 ID를 파라미터로 전달해서 채널 정보 조회
   const channelsFromVideosQuery = useQuery(
     'channelsFromVideos',
-    () => getLocalChannels(channelIdsFromVideos),
+    () => getChannels(channelIdsFromVideos),
     {
       retry: 0,
       enabled: channelIdsFromVideos.length > 0,
