@@ -61,4 +61,34 @@ export async function getLocalChannelVideos({ channelId, size = 10 }) {
   return items.map(mapSearchedVideo);
 }
 
+/**
+ * 키워드로 비디오 목록을 검색합니다
+ *
+ * @param {*} param0
+ * @returns
+ */
+export async function searchVideos({ query = '', size = 10 }) {
+  const response = await instance.get('', {
+    params: {
+      q: query,
+      maxResults: size,
+      part: 'snippet',
+      type: 'video',
+      key: process.env.REACT_APP_YOUTUBE_API_KEY,
+    },
+  });
+
+  const { items } = response.data;
+
+  return items.map(mapSearchedVideo);
+}
+
+// eslint-disable-next-line no-unused-vars
+export async function searchLocalVideos({ query = '', size = 10 }) {
+  const response = await fetch('/videos/search.json');
+  const { items } = await response.json();
+
+  return items.map(mapSearchedVideo);
+}
+
 export default {};
