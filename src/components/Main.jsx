@@ -1,3 +1,3 @@
 export default function Main({ children }) {
-  return <main className="max-w-screen-2xl m-auto my-0">{children}</main>;
+  return <main className="max-w-screen-xl m-auto my-0">{children}</main>;
 }
