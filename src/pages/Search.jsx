@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 import { searchVideos } from '../api/search';
 import SearchVideoItem from '../components/SearchVideoItem';
+import { getChannels } from '../api/channels';
 
 export default function Search() {
   // TODO: hook으로 분리
@@ -18,15 +19,37 @@ export default function Search() {
     },
   );
 
-  if (searchQuery.isLoading) {
+  const videoList = searchQuery.data ?? [];
+  const channelIds = videoList.map(video => video.channel.id);
+
+  // 채널 api 쿼리
+  // TODO: hook으로 분리
+  const channelQuery = useQuery(
+    ['channel'],
+    () => getChannels(channelIds.join(',')),
+    {
+      retry: 0,
+      enabled: !!channelIds.length,
+    },
+  );
+
+  const channels = channelQuery.data ?? [];
+
+  function getChannelInfoById(channelId) {
+    const matched = channels.find(channel => channel.id === channelId);
+
+    return matched ?? null;
+  }
+
+  if (searchQuery.isLoading || channelQuery.isLoading) {
     return <div>loading...</div>;
   }
 
-  if (searchQuery.error) {
-    return <div>Error: {searchQuery.error.message}</div>;
+  if (searchQuery.error || channelQuery.error) {
+    return (
+      <div>Error: {(searchQuery.error || channelQuery.error).message}</div>
+    );
   }
-
-  const videoList = searchQuery.data ?? [];
 
   let content = '';
 
@@ -35,7 +58,10 @@ export default function Search() {
       <ul>
         {videoList.map(video => (
           <li key={video.id} className="mt-4">
-            <SearchVideoItem video={video} />
+            <SearchVideoItem
+              video={video}
+              channel={getChannelInfoById(video.channel.id)}
+            />
           </li>
         ))}
       </ul>
