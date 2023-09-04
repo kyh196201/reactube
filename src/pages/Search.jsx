@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
-import { searchLocalVideos } from '../api/search';
+import { searchVideos } from '../api/search';
 import SearchVideoItem from '../components/SearchVideoItem';
 
 export default function Search() {
@@ -11,7 +11,7 @@ export default function Search() {
   // 검색 api 쿼리
   const searchQuery = useQuery(
     ['search', query],
-    () => searchLocalVideos({ query }),
+    () => searchVideos({ query }),
     {
       retry: 0,
       enabled: !!query,
@@ -26,7 +26,7 @@ export default function Search() {
     return <div>Error: {searchQuery.error.message}</div>;
   }
 
-  const videoList = searchQuery.data;
+  const videoList = searchQuery.data ?? [];
 
   let content = '';
 
@@ -42,7 +42,7 @@ export default function Search() {
     );
   } else {
     content = (
-      <div>
+      <div className="mt-[140px]">
         <h2 className="text-center text-2xl mb-4">검색결과가 없습니다.</h2>
         <p className="text-center text-sm">
           다른 검색어를 시도해 보거나 검색 필터를 삭제하세요.
