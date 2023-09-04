@@ -37,6 +37,7 @@ export async function getPopularVideos() {
       part: 'snippet,statistics',
       chart: 'mostPopular',
       maxResults: 25,
+      regionCode: 'KR',
       key: process.env.REACT_APP_YOUTUBE_API_KEY,
     },
   });
