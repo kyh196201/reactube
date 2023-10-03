@@ -7,6 +7,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import { getVideo } from '../api/videos';
 import { getChannels } from '../api/channels';
 import { getChannelVideos } from '../api/search';
+import { formatCount } from '../utils';
 
 export default function Video() {
   const { videoId } = useParams();
@@ -111,7 +112,7 @@ export default function Video() {
                 <div className="flex flex-1 flex-col">
                   <em className="text-custom-black">{channel.title}</em>
                   <span className="text-xs text-custom-gray">
-                    구독자 {channel.subscriberCount}명
+                    구독자 {formatCount(channel.subscriberCount)}명
                   </span>
                 </div>
               </div>
