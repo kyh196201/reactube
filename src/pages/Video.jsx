@@ -126,7 +126,7 @@ export default function Video() {
       {/* 연관 비디오 목록 영역 */}
       <section className="grow w-1/3 p-6 pl-0">
         <h2 className="sr-only">연관된 비디오 목록</h2>
-        {channelVideos.length && (
+        {channelVideos.length > 0 && (
           <ul>
             {channelVideos.map((video, index) => (
               <li key={video.id} className={index > 0 ? 'mt-2' : ''}>
