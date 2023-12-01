@@ -53,7 +53,7 @@ export default class YoutubeService {
     return response.data.items.map(item =>
       mapVideo({
         ...item,
-        id: item.id,
+        id: item.id.videoId,
       }),
     );
   }

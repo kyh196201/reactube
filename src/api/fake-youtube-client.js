@@ -25,7 +25,7 @@ export default class FakeYoutubeService {
     return items.map(item =>
       mapVideo({
         ...item,
-        id: item.id,
+        id: item.id.videoId,
       }),
     );
   }
