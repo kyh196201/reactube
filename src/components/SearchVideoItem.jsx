@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { getElapsedTime } from '../utils/date';
 import { formatCount } from '../utils';
 import Avatar from './Avatar';
+import { unescapeHtmlEntities } from '../utils/format';
 
 export default function SearchVideoItem(props) {
   const { video, channel } = props;
@@ -9,6 +10,7 @@ export default function SearchVideoItem(props) {
   const videoDetailPath = `/video/${video.id}`;
   const elapsedTime = getElapsedTime(video.publishedAt);
   const viewCount = video.viewCount ? formatCount(video.viewCount) : 0;
+  const videoTitle = unescapeHtmlEntities(video.title);
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -18,7 +20,7 @@ export default function SearchVideoItem(props) {
           <img
             className="w-full h-full object-cover"
             src={video.thumbnail}
-            alt={video.title}
+            alt={videoTitle}
           />
         </figure>
       </Link>
@@ -27,7 +29,7 @@ export default function SearchVideoItem(props) {
       <div className="grow min-w-0">
         <Link to={videoDetailPath} className="block pr-6">
           <h3 className="line-clamp-2 text-custom-black text-lg mb-1">
-            {video.title}
+            {videoTitle}
           </h3>
 
           <div className="items-center text-custom-gray text-xs overflow-hidden whitespace-nowrap text-ellipsis">

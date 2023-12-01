@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { getElapsedTime } from '../utils/date';
 import Avatar from './Avatar';
 import { formatCount } from '../utils';
+import { unescapeHtmlEntities } from '../utils/format';
 
 export default function VideoItem(props) {
   const { video, channel, type = 'vertical', showViewCount = true } = props;
@@ -9,6 +10,7 @@ export default function VideoItem(props) {
   const videoDetailPath = `/video/${video.id}`;
   const elapsedTime = getElapsedTime(video.publishedAt);
   const viewCount = video.viewCount ? formatCount(video.viewCount) : 0;
+  const videoTitle = unescapeHtmlEntities(video.title);
 
   // 가로 타입
   if (type === 'horizontal') {
@@ -20,7 +22,7 @@ export default function VideoItem(props) {
             <img
               className="w-full h-full object-cover"
               src={video.thumbnail}
-              alt={video.title}
+              alt={videoTitle}
             />
           </figure>
         </Link>
@@ -29,7 +31,7 @@ export default function VideoItem(props) {
         <div className="grow min-w-0">
           <Link to={videoDetailPath} className="block pr-6">
             <h3 className="line-clamp-2 text-custom-black text-sm mb-1">
-              {video.title}
+              {videoTitle}
             </h3>
             <strong className="text-custom-gray text-xs font-normal">
               {channel && channel.title}
@@ -57,7 +59,7 @@ export default function VideoItem(props) {
           <img
             className="w-full h-full object-cover"
             src={video.thumbnail}
-            alt={video.title}
+            alt={videoTitle}
           />
         </figure>
       </Link>
@@ -71,7 +73,7 @@ export default function VideoItem(props) {
         )}
 
         <Link to={videoDetailPath} className="pl-3 pr-6">
-          <h3 className="line-clamp-2 text-custom-black">{video.title}</h3>
+          <h3 className="line-clamp-2 text-custom-black">{videoTitle}</h3>
           <strong className="text-custom-gray text-sm font-normal">
             {channel && channel.title}
           </strong>
