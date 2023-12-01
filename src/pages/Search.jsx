@@ -86,5 +86,5 @@ export default function Search() {
     );
   }
 
-  return <div className="w-[1096px] mx-auto">{content}</div>;
+  return <div className="px-2 xl:w-[1096px] mx-auto">{content}</div>;
 }

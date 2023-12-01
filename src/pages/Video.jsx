@@ -97,9 +97,9 @@ export default function Video() {
   }
 
   return (
-    <div className="flex">
+    <div className="flex flex-col lg:flex-row">
       {/* 비디오 영역 */}
-      <section className="grow w-2/3 p-6">
+      <section className="grow p-4 lg:p-6 lg:w-2/3">
         {/* 비디오 플레이어 */}
         <div className="mb-3">
           <VideoPlayer videoId={videoId} videoTitle={videoQuery.data.title} />
@@ -107,7 +107,7 @@ export default function Video() {
 
         {/* 비디오 정보 영역 */}
         <div className="mb-6">
-          <h2 className="mb-3 text-xl font-semibold text-custom-black">
+          <h2 className="mb-3 text-lg lg:text-xl font-semibold text-custom-black">
             {videoQuery.data.title}
           </h2>
           {/* 비디오 채널, 구독, 좋아요 공유 ... */}
@@ -135,7 +135,7 @@ export default function Video() {
       </section>
 
       {/* 연관 비디오 목록 영역 */}
-      <section className="grow w-1/3 p-6 pl-0">
+      <section className="grow p-4 lg:p-6 lg:w-1/3 lg:pl-0">
         <h2 className="sr-only">연관된 비디오 목록</h2>
         {channelVideos.length > 0 && (
           <ul>

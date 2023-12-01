@@ -47,18 +47,18 @@ export default function SearchBar() {
 
   return (
     <form
-      className="flex w-1/2 items-center max-w-[600px]"
+      className="flex w-3/4 min-w-0 md:w-1/2 items-center max-w-[600px]"
       onSubmit={handleSubmit}
     >
       <input
         type="text"
-        className="flex-1 h-10 border-2 border-gray-300 text-base rounded-l-full pl-4 pr-1 focus:border-blue-500 transition-colors duration-100"
+        className="min-w-0 flex-1 h-10 border-2 border-gray-300 text-base rounded-l-full pl-4 pr-1 focus:border-blue-500 transition-colors duration-100"
         value={inputValue}
         onChange={handleChange}
       />
       <button
         type="submit"
-        className="flex justify-center items-center h-10 border-2 border-l-0 border-gray-300 rounded-r-full w-16 bg-gray-50 hover:bg-gray-100 transition-colors duration-100"
+        className="flex shrink-0 justify-center items-center h-10 border-2 border-l-0 border-gray-300 rounded-r-full w-16 bg-gray-50 hover:bg-gray-100 transition-colors duration-100"
       >
         <BsSearch />
         <span className="sr-only">검색</span>

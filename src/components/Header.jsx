@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 
 export default function Header() {
   return (
-    <header className="flex px-8 sticky top-0 bg-white z-10">
+    <header className="flex px-4 md:px-8 sticky top-0 bg-white z-10">
       {/* logo */}
       <h1 className="cursor-pointer">
         <Link to="/" className="block w-32 p-4">
@@ -12,7 +12,7 @@ export default function Header() {
         </Link>
       </h1>
 
-      <div className="flex flex-1 justify-center">
+      <div className="flex flex-1 justify-end md:justify-center min-w-0">
         <SearchBar />
       </div>
     </header>

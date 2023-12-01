@@ -50,7 +50,7 @@ export default function Home() {
       <section className="my-8 mx-4">
         {!videos && <div>loading...</div>}
         {videos?.length && (
-          <ul className="grid grid-cols-3 gap-x-4 gap-y-8">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-2 gap-y-4">
             {videos.map(video => (
               <li key={video.id}>
                 <VideoItem

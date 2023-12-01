@@ -6,15 +6,14 @@ import Avatar from './Avatar';
 export default function SearchVideoItem(props) {
   const { video, channel } = props;
 
-  // TODO: hook으로 분리
   const videoDetailPath = `/video/${video.id}`;
   const elapsedTime = getElapsedTime(video.publishedAt);
   const viewCount = video.viewCount ? formatCount(video.viewCount) : 0;
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-col md:flex-row">
       {/* 비디오 썸네일 */}
-      <Link to={videoDetailPath} className="shrink-0 w-[360px] mr-4">
+      <Link to={videoDetailPath} className="shrink-0 w-full md:w-[360px] mr-4">
         <figure className="aspect-video overflow-hidden rounded-lg">
           <img
             className="w-full h-full object-cover"
