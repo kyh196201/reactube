@@ -1,21 +1,27 @@
 import { useQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
-import { searchVideos } from '../api/search';
+import { useMemo } from 'react';
 import SearchVideoItem from '../components/SearchVideoItem';
-import { getChannels } from '../api/channels';
+// import YoutubeClient from '../api/fake-youtube-client';
+import YoutubeClient from '../api/youtube-client';
+import YoutubeService from '../api/youtube-service';
 
 export default function Search() {
-  // TODO: hook으로 분리
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
+  const youtubeClient = useMemo(() => new YoutubeClient(), []);
+  const youtubeService = useMemo(
+    () => new YoutubeService(youtubeClient),
+    [youtubeClient],
+  );
 
   // 검색 api 쿼리
   const searchQuery = useQuery(
     ['search', query],
-    () => searchVideos({ query }),
+    () => youtubeService.searchVideos({ query }),
     {
-      retry: 0,
       enabled: !!query,
+      staleTime: 1000 * 60 * 1,
     },
   );
 
@@ -26,13 +32,13 @@ export default function Search() {
     : [];
 
   // 채널 api 쿼리
-  // TODO: hook으로 분리
   const channelQuery = useQuery(
     ['channel', sortedChannelIds.join(',')],
-    () => getChannels(sortedChannelIds.join(',')),
+    () => youtubeService.getChannels(sortedChannelIds.join(',')),
     {
       retry: 0,
       enabled: !!sortedChannelIds.length,
+      staleTime: 1000 * 60 * 5,
     },
   );
 

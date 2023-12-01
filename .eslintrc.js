@@ -27,6 +27,7 @@ module.exports = {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'class-methods-use-this': 0,
     // 'linebreak-style': [2, 'windows'],
     'prettier/prettier': [
       'warn',

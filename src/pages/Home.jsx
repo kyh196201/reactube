@@ -1,49 +1,44 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useQuery } from 'react-query';
+import { useMemo } from 'react';
 import VideoItem from '../components/VideoItem';
-import { getChannels } from '../api/channels';
-import { getPopularVideos } from '../api/videos';
+// import YoutubeClient from '../api/fake-youtube-client';
+import YoutubeClient from '../api/youtube-client';
+import YoutubeService from '../api/youtube-service';
 
 export default function Home() {
-  const [videos, setVideos] = useState([]);
-  const [channels, setChannels] = useState([]);
+  const youtubeClient = useMemo(() => new YoutubeClient(), []);
+  const youtubeService = useMemo(
+    () => new YoutubeService(youtubeClient),
+    [youtubeClient],
+  );
 
-  // 비디오 목록 조회
-  async function fetchPopularVideos() {
-    const videoItems = await getPopularVideos();
+  const { data: videos } = useQuery(
+    ['videos'],
+    () => youtubeService.getPopularVideos(),
+    {
+      staleTime: 1000 * 60 * 5, // 300000ms
+    },
+  );
 
-    setVideos(prev => {
-      return [...prev, ...videoItems];
-    });
+  const channelIds = (videos || []).map(video => video.channel.id).join(',');
 
-    return videoItems ?? [];
-  }
+  const { data: channels } = useQuery(
+    ['channels', channelIds],
+    () => {
+      // 비디오 목록을 조회한 후 채널 목록을 조회하기 위해 추가
+      if (!videos?.length) {
+        return [];
+      }
 
-  // 채널 목록 조회
-  // eslint-disable-next-line no-unused-vars
-  async function fetchChannels(channelIds = []) {
-    const channelItems = await getChannels(channelIds.join());
-
-    setChannels(prev => {
-      return [...prev, ...channelItems];
-    });
-  }
-
-  const fetchVideosAndChannels = useCallback(async () => {
-    const videoList = await fetchPopularVideos();
-
-    if (videoList.length) {
-      const channelIds = videoList.map(video => video.channel.id);
-
-      await fetchChannels(channelIds);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchVideosAndChannels();
-  }, [fetchVideosAndChannels]);
+      return youtubeService.getChannels(channelIds);
+    },
+    {
+      staleTime: 1000 * 60 * 5,
+    },
+  );
 
   function getChannelInfoById(channelId) {
-    const matched = channels.find(channel => channel.id === channelId);
+    const matched = (channels || []).find(channel => channel.id === channelId);
 
     return matched ?? null;
   }
@@ -53,16 +48,19 @@ export default function Home() {
       <h2 className="sr-only">홈 페이지</h2>
 
       <section className="my-8 mx-4">
-        <ul className="grid grid-cols-3 gap-x-4 gap-y-8">
-          {videos.map(video => (
-            <li key={video.id}>
-              <VideoItem
-                video={video}
-                channel={getChannelInfoById(video.channel.id)}
-              />
-            </li>
-          ))}
-        </ul>
+        {!videos && <div>loading...</div>}
+        {videos?.length && (
+          <ul className="grid grid-cols-3 gap-x-4 gap-y-8">
+            {videos.map(video => (
+              <li key={video.id}>
+                <VideoItem
+                  video={video}
+                  channel={getChannelInfoById(video.channel.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     </div>
   );

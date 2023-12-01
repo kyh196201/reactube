@@ -61,6 +61,7 @@ export default function SearchBar() {
         className="flex justify-center items-center h-10 border-2 border-l-0 border-gray-300 rounded-r-full w-16 bg-gray-50 hover:bg-gray-100 transition-colors duration-100"
       >
         <BsSearch />
+        <span className="sr-only">검색</span>
       </button>
     </form>
   );

@@ -1,31 +1,41 @@
 import { useQuery } from 'react-query';
 import { Link, useParams } from 'react-router-dom';
+import { useMemo } from 'react';
 import Avatar from '../components/Avatar';
 import VideoItem from '../components/VideoItem';
 import VideoDescription from '../components/VideoDescription';
 import VideoPlayer from '../components/VideoPlayer';
-import { getVideo } from '../api/videos';
-import { getChannels } from '../api/channels';
-import { getChannelVideos } from '../api/search';
 import { formatCount } from '../utils';
+// import YoutubeClient from '../api/fake-youtube-client';
+import YoutubeClient from '../api/youtube-client';
+import YoutubeService from '../api/youtube-service';
 
 export default function Video() {
   const { videoId } = useParams();
+  const youtubeClient = useMemo(() => new YoutubeClient(), []);
+  const youtubeService = useMemo(
+    () => new YoutubeService(youtubeClient),
+    [youtubeClient],
+  );
 
   // 비디오 api 쿼리
-  const videoQuery = useQuery(['video', videoId], () => getVideo(videoId), {
-    retry: 0,
-  });
+  const videoQuery = useQuery(
+    ['video', videoId],
+    () => youtubeService.getVideo(videoId),
+    {
+      staleTime: 1000 * 60 * 5,
+    },
+  );
 
   const channelId = videoQuery.data?.channel?.id;
 
   // 채널 api 쿼리
   const channelQuery = useQuery(
     ['channel', channelId],
-    () => getChannels(channelId),
+    () => youtubeService.getChannels(channelId),
     {
-      retry: 0,
       enabled: !!channelId,
+      staleTime: 1000 * 60 * 5,
     },
   );
 
@@ -34,10 +44,10 @@ export default function Video() {
   // 채널에 속한 비디오 목록 api 쿼리
   const channelVideosQuery = useQuery(
     ['channelVideos', channelId],
-    () => getChannelVideos({ channelId }),
+    () => youtubeService.getChannelVideos({ channelId }),
     {
-      retry: 0,
       enabled: !!channelId,
+      staleTime: 1000 * 60 * 5,
     },
   );
 
@@ -51,10 +61,10 @@ export default function Video() {
   // 3. 채널 ID를 파라미터로 전달해서 채널 정보 조회
   const channelsFromVideosQuery = useQuery(
     'channelsFromVideos',
-    () => getChannels(channelIdsFromVideos),
+    () => youtubeService.getChannels(channelIdsFromVideos),
     {
-      retry: 0,
       enabled: channelIdsFromVideos.length > 0,
+      staleTime: 1000 * 60 * 1,
     },
   );
 
