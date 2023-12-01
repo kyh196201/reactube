@@ -5,6 +5,7 @@ import SearchVideoItem from '../components/SearchVideoItem';
 // import YoutubeClient from '../api/fake-youtube-client';
 import YoutubeClient from '../api/youtube-client';
 import YoutubeService from '../api/youtube-service';
+import useChannelData from '../hooks/useChannelData';
 
 export default function Search() {
   const [searchParams] = useSearchParams();
@@ -27,37 +28,14 @@ export default function Search() {
 
   const videoList = searchQuery.data ?? [];
   const channelIds = videoList.map(video => video.channel.id);
-  const sortedChannelIds = channelIds.length
-    ? [...channelIds].sort((a, b) => a.localeCompare(b))
-    : [];
+  const { getChannelInfoById } = useChannelData(channelIds);
 
-  // 채널 api 쿼리
-  const channelQuery = useQuery(
-    ['channel', sortedChannelIds.join(',')],
-    () => youtubeService.getChannels(sortedChannelIds.join(',')),
-    {
-      retry: 0,
-      enabled: !!sortedChannelIds.length,
-      staleTime: 1000 * 60 * 5,
-    },
-  );
-
-  const channels = channelQuery.data ?? [];
-
-  function getChannelInfoById(channelId) {
-    const matched = channels.find(channel => channel.id === channelId);
-
-    return matched ?? null;
-  }
-
-  if (searchQuery.isLoading || channelQuery.isLoading) {
+  if (searchQuery.isLoading) {
     return <div>loading...</div>;
   }
 
-  if (searchQuery.error || channelQuery.error) {
-    return (
-      <div>Error: {(searchQuery.error || channelQuery.error).message}</div>
-    );
+  if (searchQuery.error) {
+    return <div>Error: {searchQuery.error.message}</div>;
   }
 
   let content = '';

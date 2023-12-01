@@ -4,6 +4,7 @@ import VideoItem from '../components/VideoItem';
 // import YoutubeClient from '../api/fake-youtube-client';
 import YoutubeClient from '../api/youtube-client';
 import YoutubeService from '../api/youtube-service';
+import useChannelData from '../hooks/useChannelData';
 
 export default function Home() {
   const youtubeClient = useMemo(() => new YoutubeClient(), []);
@@ -20,28 +21,8 @@ export default function Home() {
     },
   );
 
-  const channelIds = (videos || []).map(video => video.channel.id).join(',');
-
-  const { data: channels } = useQuery(
-    ['channels', channelIds],
-    () => {
-      // 비디오 목록을 조회한 후 채널 목록을 조회하기 위해 추가
-      if (!videos?.length) {
-        return [];
-      }
-
-      return youtubeService.getChannels(channelIds);
-    },
-    {
-      staleTime: 1000 * 60 * 5,
-    },
-  );
-
-  function getChannelInfoById(channelId) {
-    const matched = (channels || []).find(channel => channel.id === channelId);
-
-    return matched ?? null;
-  }
+  const channelIds = (videos || []).map(video => video.channel.id);
+  const { getChannelInfoById } = useChannelData(channelIds);
 
   return (
     <div>

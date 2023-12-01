@@ -9,6 +9,7 @@ import { formatCount } from '../utils';
 // import YoutubeClient from '../api/fake-youtube-client';
 import YoutubeClient from '../api/youtube-client';
 import YoutubeService from '../api/youtube-service';
+import useChannelData from '../hooks/useChannelData';
 
 export default function Video() {
   const { videoId } = useParams();
@@ -29,18 +30,6 @@ export default function Video() {
 
   const channelId = videoQuery.data?.channel?.id;
 
-  // 채널 api 쿼리
-  const channelQuery = useQuery(
-    ['channel', channelId],
-    () => youtubeService.getChannels(channelId),
-    {
-      enabled: !!channelId,
-      staleTime: 1000 * 60 * 5,
-    },
-  );
-
-  const channel = channelQuery.data?.[0] ?? null;
-
   // 채널에 속한 비디오 목록 api 쿼리
   const channelVideosQuery = useQuery(
     ['channelVideos', channelId],
@@ -53,46 +42,22 @@ export default function Video() {
 
   const channelVideos = channelVideosQuery.data ?? [];
 
-  // 2. 조회한 비디오 목록에서 채널 ID를 추출
-  const channelIdsFromVideos = channelVideos
-    .map(video => video.channel.id)
-    .join(',');
-
-  // 3. 채널 ID를 파라미터로 전달해서 채널 정보 조회
-  const channelsFromVideosQuery = useQuery(
-    'channelsFromVideos',
-    () => youtubeService.getChannels(channelIdsFromVideos),
-    {
-      enabled: channelIdsFromVideos.length > 0,
-      staleTime: 1000 * 60 * 1,
-    },
-  );
-
-  function getChannelInfoById(id) {
-    const { data: channels } = channelsFromVideosQuery;
-
-    const matched = channels?.find(item => item.id === id);
-
-    return matched ?? null;
+  const channelIdList = new Set(channelVideos.map(video => video.channel.id));
+  if (typeof channelId === 'string') {
+    channelIdList.add(channelId);
   }
 
-  if (
-    videoQuery.isLoading ||
-    channelQuery.isLoading ||
-    channelsFromVideosQuery.isLoading
-  ) {
+  const { getChannelInfoById } = useChannelData([...channelIdList]);
+
+  const channel = getChannelInfoById(channelId);
+
+  if (videoQuery.isLoading) {
     return <div>loading...</div>;
   }
 
-  if (videoQuery.error || channelQuery.error || channelsFromVideosQuery.error) {
+  if (videoQuery.error || channelVideosQuery.error) {
     return (
-      <div>
-        Error:{' '}
-        {
-          (videoQuery.error || channelQuery.error || channelVideosQuery.error)
-            .message
-        }
-      </div>
+      <div>Error: {(videoQuery.error || channelVideosQuery.error).message}</div>
     );
   }
 
