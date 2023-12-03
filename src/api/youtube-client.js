@@ -40,22 +40,29 @@ export default class YoutubeService {
   // #endregion
 
   // #region search
-  async searchVideos({ query = '', size = 10 }) {
-    const response = await this.apiClient.get('search', {
+  async searchVideos({ query = '', size = 10, pageToken }) {
+    const { data } = await this.apiClient.get('search', {
       params: {
         q: query,
         maxResults: size,
         part: 'snippet',
         type: 'video',
+        pageToken,
       },
     });
 
-    return response.data.items.map(item =>
+    const items = data.items.map(item =>
       mapVideo({
         ...item,
         id: item.id.videoId,
       }),
     );
+
+    return {
+      items,
+      nextPageToken: data.nextPageToken,
+      pageInfo: data.pageInfo,
+    };
   }
 
   async getChannelVideos({ channelId, size = 10 }) {

@@ -20,14 +20,20 @@ export default class FakeYoutubeService {
   // #region search
   async searchVideos() {
     const response = await fetch('/videos/search.json');
-    const { items } = await response.json();
+    const data = await response.json();
 
-    return items.map(item =>
+    const items = data.items.map(item =>
       mapVideo({
         ...item,
         id: item.id.videoId,
       }),
     );
+
+    return {
+      items,
+      nextPageToken: data.nextPageToken,
+      pageInfo: data.pageInfo,
+    };
   }
 
   async getChannelVideos() {

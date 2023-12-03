@@ -1,6 +1,7 @@
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { AiOutlineLoading3Quarters as LoadingIcon } from 'react-icons/ai';
 import SearchVideoItem from '../components/SearchVideoItem';
 // import YoutubeClient from '../api/fake-youtube-client';
 import YoutubeClient from '../api/youtube-client';
@@ -16,42 +17,88 @@ export default function Search() {
     [youtubeClient],
   );
 
+  const observerElem = useRef(null);
+
   // 검색 api 쿼리
-  const searchQuery = useQuery(
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
     ['search', query],
-    () => youtubeService.searchVideos({ query }),
+    ({ pageParam: pageToken }) =>
+      youtubeService.searchVideos({ query, pageToken }),
     {
       enabled: !!query,
       staleTime: 1000 * 60 * 1,
+      getNextPageParam: lastPage => lastPage.nextPageToken,
     },
   );
 
-  const videoList = searchQuery.data ?? [];
+  const videoList = data?.pages.flatMap(page => page.items) ?? [];
   const channelIds = videoList.map(video => video.channel.id);
   const { getChannelInfoById } = useChannelData(channelIds);
 
-  if (searchQuery.isLoading) {
+  const handleObserver = useCallback(
+    entries => {
+      const [target] = entries;
+      if (target.isIntersecting && hasNextPage) {
+        fetchNextPage();
+      }
+    },
+    [fetchNextPage, hasNextPage],
+  );
+
+  useEffect(() => {
+    const element = observerElem.current;
+    const option = { threshold: 0 };
+    const observer = new IntersectionObserver(handleObserver, option);
+
+    if (element) {
+      observer.observe(element);
+    }
+
+    // TODO: clean up function
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, [observerElem, handleObserver]);
+
+  if (isLoading) {
     return <div>loading...</div>;
   }
 
-  if (searchQuery.error) {
-    return <div>Error: {searchQuery.error.message}</div>;
+  if (error) {
+    return <div>Error: {error.message}</div>;
   }
 
   let content = '';
 
   if (videoList.length) {
     content = (
-      <ul>
-        {videoList.map(video => (
-          <li key={video.id} className="mt-4">
-            <SearchVideoItem
-              video={video}
-              channel={getChannelInfoById(video.channel.id)}
-            />
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul>
+          {videoList.map(video => (
+            <li key={video.id} className="mt-4">
+              <SearchVideoItem
+                video={video}
+                channel={getChannelInfoById(video.channel.id)}
+              />
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex justify-center" ref={observerElem}>
+          {isFetchingNextPage && (
+            <LoadingIcon className="h-8 w-8 my-8 animate-spin fill-gray-700" />
+          )}
+        </div>
+      </>
     );
   } else {
     content = (
